@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_link" args="0 0 0 0.5 -0.5 0.5 0.5 camera_optical_frame camera_link 100" /> <!-- Conversion between OpenCV Z forward Y right to ROS X forward Y left -->
+</launch>

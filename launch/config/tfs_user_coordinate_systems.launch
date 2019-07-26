@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_optical_frame" args="0.174813158725 0.148589126615 0.613748166288 -0.689987238692 0.701168914982 -0.00963410754586 -0.179407210216 camera_optical_frame charuco 100" />
+	<node pkg="tf" type="static_transform_publisher" name="tf_charuco" args="-0.9544230626976918 0.0688091860387035 0.2332784478717422 0.0006235977927597 0.0011030646026178 -0.0656707917878215 charuco base_link 100" />
+	<node pkg="tf" type="static_transform_publisher" name="tf_table" args="-0.05 -0.05 0.02 0 0 0 charuco table 100" />
+</launch>
