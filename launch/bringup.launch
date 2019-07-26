@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <launch>
 	<arg name="use_cloud_storage_mode" default="false" />
+	<arg name="use_feature_matching" default="false" />
+
 	<include file="$(find pointcloud_registration)/launch/config/pointcloud_registration.launch">
 		<arg name="use_cloud_storage_mode" default="$(arg use_cloud_storage_mode)" />
+		<arg name="use_feature_matching" default="$(arg use_feature_matching)" />
 	</include>
+	
 	<include file="$(find pointcloud_registration)/launch/config/tfs_sensor.launch" />
 	<include file="$(find pointcloud_registration)/launch/config/tfs_user_coordinate_systems.launch" />
 </launch>

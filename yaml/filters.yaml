@@ -31,6 +31,6 @@ filters:
                 sorting_axis: "Y" # Available axis: [ X | Y | Z ] -> only used with [ MinAxisValueSorter | MaxAxisValueSorter ]
                 clusters_colored_cloud_publish_topic: 'filtered_pointcloud_clusters_colored'
         3_random_sample:
-            number_of_random_samples: 6000
+            number_of_random_samples: 8000
             invert_sampling: false
             filtered_cloud_publish_topic: 'filtered_pointcloud_random_sample_clustering'

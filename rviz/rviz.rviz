@@ -116,6 +116,8 @@ Visualization Manager:
           Value: true
         registration_correction:
           Value: true
+        registration_correction__feature_matching:
+          Value: true
         registration_correction__intermediate_point_matching:
           Value: false
         registration_correction__point_matching:
@@ -131,10 +133,11 @@ Visualization Manager:
         camera_optical_frame:
           camera_link:
             {}
-          charuco:
-            base_link:
-              registration_correction:
-                {}
+        charuco:
+          base_link:
+            registration_correction:
+              {}
+            registration_correction__feature_matching:
               registration_correction__intermediate_point_matching:
                 registration_correction__point_matching:
                   {}
@@ -347,7 +350,7 @@ Visualization Manager:
           Color: 255; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -364,7 +367,143 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
+        - Alpha: 1
+          Arrow Length: 0.300000012
+          Axes Length: 0.300000012
+          Axes Radius: 0.00999999978
+          Class: rviz/PoseArray
+          Color: 255; 25; 0
+          Enabled: false
+          Head Length: 0.0299999993
+          Head Radius: 0.0299999993
+          Name: Initial pose estimation
+          Shaft Length: 0.100000001
+          Shaft Radius: 0.00999999978
+          Shape: Arrow (3D)
+          Topic: /pointcloud_registration/localization_initial_pose_estimations
+          Unreliable: false
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 177; 118; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: feature_matching
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.00999999978
+          Style: Points
+          Topic: /pointcloud_registration/initial_alignment_reference_cloud
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 85; 255; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: reference_keypoints
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 10
+          Size (m): 0.00999999978
+          Style: Points
+          Topic: /pointcloud_registration/reference_pointcloud_keypoints
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 85; 127
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: sensor_keypoints
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 10
+          Size (m): 0.00999999978
+          Style: Points
+          Topic: /pointcloud_registration/ambient_keypoints
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 170; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: intermediate_alignment
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.00999999978
+          Style: Flat Squares
+          Topic: /pointcloud_registration/intermediate_alignment_reference_cloud
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -383,7 +522,7 @@ Visualization Manager:
           Max Intensity: 4096
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: reference_aligned
+          Name: final_alignment
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
@@ -422,7 +561,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.35073256
+      Distance: 1.9429841
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -437,10 +576,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.49979675
+      Pitch: 1.17979705
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.26847076
+      Yaw: 0.000285599381
     Saved: ~
 Window Geometry:
   Displays:

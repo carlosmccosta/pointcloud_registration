@@ -1,6 +1,6 @@
 # pointcloud_registration
 
-Configuration for the [drl](https://github.com/carlosmccosta/dynamic_robot_localization) perception pipeline for performing 6 DoF point cloud registration for correcting small offsets between a reference point cloud in a calibrated frame and a point cloud captured from a 3D sensor.
+Configuration for the [drl](https://github.com/carlosmccosta/dynamic_robot_localization) perception pipeline for performing 6 DoF point cloud registration for correcting offsets between a reference point cloud in a calibrated frame and a point cloud captured from a 3D sensor.
 
 Check the configurations of the repository [object_recognition](https://github.com/carlosmccosta/object_recognition)
 and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case.
@@ -96,4 +96,9 @@ roslaunch pointcloud_registration rviz.launch
 
 ## Notes
 
-If your 3D sensor does not provide surface normals in the point cloud, change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch)
+- If your 3D sensor does not provide surface normals in the point cloud, change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch)
+
+- If you expect large offsets to occur between the reference point cloud and the sensor data, then you should activate the usage of feature matching in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) by running:
+  ```
+  roslaunch pointcloud_registration bringup.launch use_feature_matching:=true
+  ```

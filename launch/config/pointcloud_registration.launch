@@ -7,6 +7,7 @@
 	<arg name="reference_pointcloud_filename" default="" />
 	<arg name="reference_pointclouds_database_folder_path" default="$(find pointcloud_registration)/models/" />
 	<arg name="sensor_provides_surface_normals" default="true" />
+	<arg name="use_feature_matching" default="false" />
 
 	<include file="$(find object_recognition_skill_server)/launch/object_recognition.launch">
 		<arg name="namespace" default="pointcloud_storage" if="$(arg use_cloud_storage_mode)" />
@@ -24,7 +25,7 @@
 		<!-- 3d processing pipeline parameters -->
 		<arg name="use_cloud_storage_mode" default="$(arg use_cloud_storage_mode)" />
 		<arg name="load_initial_pose_estimation_pipeline_using_cloud_matching" default="true" />
-		<arg name="use_feature_matching" default="false" />
+		<arg name="use_feature_matching" default="$(arg use_feature_matching)" />
 
 		<!-- configuration files (empty paths can be given for avoiding the rosparam load) -->
 		<arg name="yaml_configuration_filters_filename" default="$(find pointcloud_registration)/yaml/filters.yaml" />
@@ -32,6 +33,7 @@
 		<arg name="yaml_configuration_filters_roi_filename" default="$(find pointcloud_registration)/yaml/filters_roi.yaml" />
 		<arg name="yaml_configuration_normal_estimators_filename" default="" if="$(arg sensor_provides_surface_normals)" />
 		<arg name="yaml_configuration_curvature_estimators_filename" default="" />
+		<arg name="yaml_configuration_initial_pose_estimators_feature_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_feature_matchers.yaml" />
 		<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_point_matchers.yaml" />
 		<arg name="yaml_configuration_transformation_validators_filename" default="$(find pointcloud_registration)/yaml/transformation_validators.yaml" />
 
