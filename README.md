@@ -11,7 +11,7 @@ and the documentation of the [dynamic_robot_localization](https://github.com/car
 
 For segmenting the target object from the environment, a region of interest is used (defined in [yaml/filters_ros.yaml](yaml/filters_roi.yaml)) that is applied to the point cloud after transforming it to a calibrated reference frame (frame_id: table).
 
-The [charuco_detector](https://github.com/carlosmccosta/charuco_detector) can be used for recalibrating the charuco frame, followed by the update of the TF publisher in [launch/config/tfs_user_coordinate_systems.launch](launch/config/tfs_user_coordiante_systems.launch) with the data given by the charuco_detector pose topic.
+The [charuco_detector](https://github.com/carlosmccosta/charuco_detector) can be used for recalibrating the charuco frame, followed by the update of the TF publisher in [launch/config/tfs_user_coordinate_systems.launch](launch/config/tfs_user_coordinate_systems.launch) with the data given by the charuco_detector pose topic.
 
 Then, the table frame can be adjusted in relation to the charuco frame.
 
@@ -26,7 +26,7 @@ roslaunch pointcloud_registration bringup.launch use_cloud_storage_mode:=true
 
 Then, place the target object on top of the table, trigger the 3D sensor and send a goal to the perception pipeline with the file name that will be given to the reference point cloud.
 
-The name can be an absolute path or a relative path in relation to the [reference_pointclouds_database_folder_path] specified in [launch/pointcloud_registration.launch](launch/pointcloud_registration.launch).
+The name can be an absolute path or a relative path in relation to the [reference_pointclouds_database_folder_path] specified in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch).
 
 The pipeline was also configured with an euclidean clustering algorithm for picking the largest cluster from the environment (0), or a given cluster specified in the perception pipeline goal (clusters are sorted by decreasing size by default).
 
