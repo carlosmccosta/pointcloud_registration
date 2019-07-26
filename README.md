@@ -44,7 +44,7 @@ goal_id:
     nsecs: 0
   id: ''
 goal:
-  objectModel: 'reference_point_cloud_1.ply'
+  objectModel: 'reference_point_cloud_1'
   clusterIndex: 0"
 ```
 
@@ -72,7 +72,7 @@ goal_id:
     nsecs: 0
   id: ''
 goal:
-  objectModel: 'reference_point_cloud_1.ply'
+  objectModel: 'reference_point_cloud_1'
   clusterIndex: 0"
 ```
 
@@ -92,3 +92,8 @@ For monitoring the registration state, run:
 ```
 roslaunch pointcloud_registration rviz.launch
 ```
+
+
+## Notes
+
+If your 3D sensor does not provide surface normals in the point cloud, change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch)

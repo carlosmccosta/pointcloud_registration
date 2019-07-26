@@ -83,7 +83,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 255
@@ -100,7 +100,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Class: rviz/TF
       Enabled: true
       Frame Timeout: 1e+09
@@ -108,10 +108,6 @@ Visualization Manager:
         All Enabled: false
         base_link:
           Value: true
-        camera_base:
-          Value: false
-        camera_base_link:
-          Value: false
         camera_link:
           Value: false
         camera_optical_frame:
@@ -133,9 +129,6 @@ Visualization Manager:
       Show Names: true
       Tree:
         camera_optical_frame:
-          camera_base:
-            camera_base_link:
-              {}
           camera_link:
             {}
           charuco:
@@ -145,8 +138,8 @@ Visualization Manager:
               registration_correction__intermediate_point_matching:
                 registration_correction__point_matching:
                   {}
-            table:
-              {}
+        table:
+          {}
       Update Interval: 0
       Value: true
     - Class: rviz/Axes
@@ -200,7 +193,7 @@ Visualization Manager:
           Color: 255; 85; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -217,7 +210,7 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -243,12 +236,12 @@ Visualization Manager:
           Size (Pixels): 4
           Size (m): 0.00999999978
           Style: Points
-          Topic: /pointcloud_storage/filtered_pointcloud_clusters_colored
+          Topic: /pointcloud_storage/filtered_pointcloud_clustering
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Cloud filtering for storage
     - Class: rviz/Group
       Displays:
@@ -429,25 +422,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.781113863
+      Distance: 1.35073256
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.119265571
-        Y: 0.23123619
-        Z: -0.150732443
+        X: 0.31714344
+        Y: 0.439662516
+        Z: -0.244588152
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.46979308
+      Pitch: 1.49979675
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.000366210938
+      Yaw: 6.26847076
     Saved: ~
 Window Geometry:
   Displays:

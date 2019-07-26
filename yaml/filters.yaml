@@ -12,12 +12,12 @@ filters:
         #     save_leaf_layout: false
         #     filtered_cloud_publish_topic: ''
         2_random_sample:
-            number_of_random_samples: 20000
+            number_of_random_samples: 40000
             invert_sampling: false
             filtered_cloud_publish_topic: ''
     ambient_pointcloud_map_frame_feature_registration:
         1_random_sample:
-            number_of_random_samples: 20000
+            number_of_random_samples: 50000
             invert_sampling: false
             filtered_cloud_publish_topic: 'filtered_pointcloud_random_sample_table'
         2_euclidean_clustering:
