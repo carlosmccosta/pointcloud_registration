@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <launch>
 	<arg name="use_cloud_storage_mode" default="false" />
-	<arg name="use_feature_matching" default="false" />
+	<arg name="use_feature_matching_for_initial_alignment" default="false" />
+	<arg name="use_pca_for_initial_alignment" default="true" />
 
 	<include file="$(find pointcloud_registration)/launch/config/pointcloud_registration.launch">
 		<arg name="use_cloud_storage_mode" default="$(arg use_cloud_storage_mode)" />
-		<arg name="use_feature_matching" default="$(arg use_feature_matching)" />
+		<arg name="use_feature_matching_for_initial_alignment" default="$(arg use_feature_matching_for_initial_alignment)" />
+		<arg name="use_pca_for_initial_alignment" default="$(arg use_pca_for_initial_alignment)" />
 	</include>
-	
+
 	<include file="$(find pointcloud_registration)/launch/config/tfs_sensor.launch" />
 	<include file="$(find pointcloud_registration)/launch/config/tfs_user_coordinate_systems.launch" />
 </launch>
