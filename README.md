@@ -64,6 +64,11 @@ goal:
 
 This package was tested for working with large objects (around 1 m squared) and mostly with a rectangular / box shape (for example, baguette trays). As such, by default the perception system is configured for using principal component analysis (PCA) for estimating the initial alignment between the reference point cloud and the sensor point cloud. This was suitable for our use case because the full object is visible and its box shape is ideal for PCA (the centroid and PCA axis give a good initial alignment).
 
+The default system configuration can be started by running:
+  ```
+  roslaunch pointcloud_registration bringup.launch
+  ```
+
 The system can also be configured to use feature matching instead of PCA, by running:
   ```
   roslaunch pointcloud_registration bringup.launch use_feature_matching_for_initial_alignment:=true use_pca_for_initial_alignment:=false
