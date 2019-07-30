@@ -11,5 +11,6 @@
 
 	<depend>charuco_detector</depend> <!-- https://github.com/carlosmccosta/charuco_detector -->
 	<depend>dynamic_robot_localization</depend> <!-- https://github.com/carlosmccosta/dynamic_robot_localization -->
+	<depend>object_recognition_skill_server</depend> <!-- https://github.com/carlosmccosta/object_recognition -->
 	<depend>tf</depend>
 </package>

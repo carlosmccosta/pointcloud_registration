@@ -8,7 +8,7 @@ As such, even though this package is generic and can be used for other use cases
 - Capture a reference point cloud containing the object on top of the calibrated table
 - Program the robot trajectories for operating on the target object (saved in a user frame, set to identity in relation to the robot base)
 - Later on, when a object of the same type arrives in the robot workspace (for painting, for example):
-  - Capture a new point cloud (with the point cloud publisher latched, or send the goal first and then trigger the sensor capture)
+  - Capture a new point cloud (with the point cloud publisher latched, or send the goal first and then trigger the sensor capture, because the perception pipeline only subscribes to point cloud topics during an active goal)
   - Send o goal to the action server of this package for correcting the offset (indicating the reference point cloud to use)
   - Update the user frame in the robot controller with the offset computed by the pointcloud_registration action server
   - Run the robot trajectory on the updated user frame
@@ -16,17 +16,6 @@ As such, even though this package is generic and can be used for other use cases
 Check the configurations of the repository [object_recognition](https://github.com/carlosmccosta/object_recognition)
 and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case. Namely, customizing the filtering stage for adjusting the number of points selected for the reference and sensor point clouds (depends on the object size and registration accuracy that you need) and also the registration timeouts associated with the feature matching and ICP registration.
 
-
-## Initial alignment
-
-This package was tested for working with large objects (around 1 m squared) and mostly with a rectangular / box shape (for example, baguette trays). As such, by default the perception system is configured for using principal component analysis (PCA) for estimating the initial alignment between the reference point cloud and the sensor point cloud. This was suitable for our use case because the full object is visible and its box shape is ideal for PCA (the centroid and PCA axis give a good initial alignment).
-
-The system can also be configured to use feature matching instead of PCA, by running:
-  ```
-  roslaunch pointcloud_registration bringup.launch use_feature_matching_for_initial_alignment:=true use_pca_for_initial_alignment:=false
-  ```
-
-Alternatively, if you expect very small offsets between the reference point cloud and the sensor point cloud, you can disable the initial alignment stage (set feature matching and pca arguments above to false) and rely only on ICP for performing the point cloud registration.
 
 
 ## Calibration of the coordinate systems for object segmentation
@@ -66,17 +55,22 @@ goal_id:
     nsecs: 0
   id: ''
 goal:
-  objectModel: 'reference_point_cloud_1_x'
+  objectModel: 'reference_point_cloud_1'
   clusterIndex: 0"
 ```
 
 
 ## Point cloud registration usage
 
-For starting the point cloud registration pipeline, run:
-```
-roslaunch pointcloud_registration bringup.launch
-```
+This package was tested for working with large objects (around 1 m squared) and mostly with a rectangular / box shape (for example, baguette trays). As such, by default the perception system is configured for using principal component analysis (PCA) for estimating the initial alignment between the reference point cloud and the sensor point cloud. This was suitable for our use case because the full object is visible and its box shape is ideal for PCA (the centroid and PCA axis give a good initial alignment).
+
+The system can also be configured to use feature matching instead of PCA, by running:
+  ```
+  roslaunch pointcloud_registration bringup.launch use_feature_matching_for_initial_alignment:=true use_pca_for_initial_alignment:=false
+  ```
+
+Alternatively, if you expect very small offsets between the reference point cloud and the sensor point cloud, you can disable the initial alignment stage (set feature matching and pca arguments above to false) and rely only on ICP for performing the point cloud registration.
+
 
 For triggering the point cloud registration, send a goal to the perception pipeline, specifying the reference point cloud filename (absolute path or relative to the [reference_pointclouds_database_folder_path]) and the cluster index to use (0 -> largest cluster).
 
