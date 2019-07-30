@@ -1,10 +1,32 @@
 # pointcloud_registration
 
-Configuration for the [drl](https://github.com/carlosmccosta/dynamic_robot_localization) perception pipeline for performing 6 DoF point cloud registration for correcting offsets between a reference point cloud in a calibrated frame and a point cloud captured from a 3D sensor.
+Configuration for the [drl](https://github.com/carlosmccosta/dynamic_robot_localization) perception pipeline for performing 6 DoF point cloud registration for correcting offsets between a reference point cloud in a calibrated frame (base_link) and a point cloud captured from a 3D sensor.
+
+This package was tested for correcting robotic arm trajectories that are taught for a given object type and then need to be corrected when new parts of the same type appear in the robot work space (with an unknown offset).
+
+As such, even though this package is generic and can be used for other use cases, it was configured by default for the following usage:
+- Capture a reference point cloud containing the object on top of the calibrated table
+- Program the robot trajectories for operating on the target object (saved in a user frame, set to identity in relation to the robot base)
+- Later on, when a object of the same type arrives in the robot workspace (for painting, for example):
+  - Capture a new point cloud (with the point cloud publisher latched, or send the goal first and then trigger the sensor capture)
+  - Send o goal to the action server of this package for correcting the offset (indicating the reference point cloud to use)
+  - Update the user frame in the robot controller with the offset computed by the pointcloud_registration action server
+  - Run the robot trajectory on the updated user frame
 
 Check the configurations of the repository [object_recognition](https://github.com/carlosmccosta/object_recognition)
-and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case.
+and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case. Namely, customizing the filtering stage for adjusting the number of points selected for the reference and sensor point clouds (depends on the object size and registration accuracy that you need) and also the registration timeouts associated with the feature matching and ICP registration.
 
+
+## Initial alignment
+
+This package was tested for working with large objects (around 1 m squared) and mostly with a rectangular / box shape (for example, baguette trays). As such, by default the perception system is configured for using principal component analysis (PCA) for estimating the initial alignment between the reference point cloud and the sensor point cloud. This was suitable for our use case because the full object is visible and its box shape is ideal for PCA (the centroid and PCA axis give a good initial alignment).
+
+The system can also be configured to use feature matching instead of PCA, by running:
+  ```
+  roslaunch pointcloud_registration bringup.launch use_feature_matching_for_initial_alignment:=true use_pca_for_initial_alignment:=false
+  ```
+
+Alternatively, if you expect very small offsets between the reference point cloud and the sensor point cloud, you can disable the initial alignment stage (set feature matching and pca arguments above to false) and rely only on ICP for performing the point cloud registration.
 
 
 ## Calibration of the coordinate systems for object segmentation
@@ -44,7 +66,7 @@ goal_id:
     nsecs: 0
   id: ''
 goal:
-  objectModel: 'reference_point_cloud_1'
+  objectModel: 'reference_point_cloud_1_x'
   clusterIndex: 0"
 ```
 
@@ -76,7 +98,7 @@ goal:
   clusterIndex: 0"
 ```
 
-The point cloud registration result is published in a ROS [geometry_msgs/PoseStamped](http://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html) topic, and can be inspected using:
+The point cloud registration result is published in a ROS [geometry_msgs/PoseStamped](http://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html) topic and also in TF. It can be inspected using:
 ```
 rostopic echo /pointcloud_registration/localization_pose
 ```
@@ -96,9 +118,4 @@ roslaunch pointcloud_registration rviz.launch
 
 ## Notes
 
-- If your 3D sensor does not provide surface normals in the point cloud, change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch)
-
-- If you expect large offsets to occur between the reference point cloud and the sensor data, then you should activate the usage of feature matching in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) by running:
-  ```
-  roslaunch pointcloud_registration bringup.launch use_feature_matching:=true
-  ```
+- This package was tested with a PhotoNeo PhoXi 3D Scanner XL, which is a very accurate 3D sensor that provides surface normals in the point cloud published by its ROS driver. If your 3D sensor does not provide surface normals in the point cloud, you need to change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) (in order to add to the perception pipeline a normal estimation module).
