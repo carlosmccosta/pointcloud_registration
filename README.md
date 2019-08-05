@@ -8,13 +8,13 @@ As such, even though this package is generic and can be used for other use cases
 - Capture a reference point cloud containing the object on top of the calibrated table
 - Program the robot trajectories for operating on the target object (saved in a user frame, set to identity in relation to the robot base)
 - Later on, when a object of the same type arrives in the robot workspace (for painting, for example):
-  - Capture a new point cloud (with the point cloud publisher latched, or send the goal first and then trigger the sensor capture, because the perception pipeline only subscribes to point cloud topics during an active goal)
+  - Capture a new point cloud (with the point cloud publisher latched, or send the goal to the pointcloud_registration action server first and then trigger the sensor capture, because the perception pipeline only subscribes to point cloud topics during an active goal)
   - Send o goal to the action server of this package for correcting the offset (indicating the reference point cloud to use)
   - Update the user frame in the robot controller with the offset computed by the pointcloud_registration action server
   - Run the robot trajectory on the updated user frame
 
 Check the configurations of the repository [object_recognition](https://github.com/carlosmccosta/object_recognition)
-and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case. Namely, customizing the filtering stage for adjusting the number of points selected for the reference and sensor point clouds (depends on the object size and registration accuracy that you need) and also the registration timeouts associated with the feature matching and ICP registration.
+and the documentation of the [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization) ROS package for customizing the perception pipeline for your specific use case. Namely, customizing the filtering stage for adjusting the [ voxel grid size / number of random points ] for the reference and sensor point clouds (depends on the object size and registration accuracy that you need) and also the registration timeouts associated with the feature matching and ICP registration.
 
 
 
@@ -39,7 +39,7 @@ Then, place the target object on top of the table, trigger the 3D sensor and sen
 
 The name can be an absolute path or a relative path in relation to the [reference_pointclouds_database_folder_path] specified in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch).
 
-The pipeline was also configured with an euclidean clustering algorithm for picking the largest cluster from the environment (0), or a given cluster specified in the perception pipeline goal (clusters are sorted by decreasing size by default).
+The pipeline was also configured with an euclidean clustering algorithm for picking the largest cluster from the environment (0), or a given cluster specified in the perception pipeline goal (clusters are sorted by decreasing size by default). The clustering can be disabled by setting [use_euclidean_clustering_segmentation] to false when starting the bringup launch file.
 
 Example of goal for triggering the saving of a reference point cloud with surface normals information:
 ```
@@ -71,13 +71,13 @@ The default system configuration can be started by running:
 
 The system can also be configured to use feature matching instead of PCA, by running:
   ```
-  roslaunch pointcloud_registration bringup.launch use_feature_matching_for_initial_alignment:=true use_pca_for_initial_alignment:=false
+  roslaunch pointcloud_registration bringup.launch use_pca_for_initial_alignment:=false use_feature_matching_for_initial_alignment:=true
   ```
 
-Alternatively, if you expect very small offsets between the reference point cloud and the sensor point cloud, you can disable the initial alignment stage (set feature matching and pca arguments above to false) and rely only on ICP for performing the point cloud registration.
+Alternatively, if you expect very small offsets between the reference point cloud and the sensor point cloud, you can disable the initial alignment stage (set pca and feature matching arguments above to false) and rely only on ICP for performing the point cloud registration.
 
 
-For triggering the point cloud registration, send a goal to the perception pipeline, specifying the reference point cloud filename (absolute path or relative to the [reference_pointclouds_database_folder_path]) and the cluster index to use (0 -> largest cluster).
+For triggering the point cloud registration, send a goal to the perception pipeline, specifying the reference point cloud filename (absolute path or relative to the [reference_pointclouds_database_folder_path]) and the cluster index to use (0 -> largest cluster). The clustering can be disabled by setting [use_euclidean_clustering_segmentation] to false when starting the bringup launch file.
 
 Example of goal for triggering the point cloud registration:
 ```
@@ -97,7 +97,9 @@ goal:
   clusterIndex: 0"
 ```
 
-The point cloud registration result is published in a ROS [geometry_msgs/PoseStamped](http://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html) topic and also in TF. It can be inspected using:
+The point cloud registration result is published in a ROS [geometry_msgs/PoseStamped](http://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html) topic and also in TF.
+
+It can be inspected using:
 ```
 rostopic echo /pointcloud_registration/localization_pose
 ```
@@ -117,4 +119,4 @@ roslaunch pointcloud_registration rviz.launch
 
 ## Notes
 
-- This package was tested with a PhotoNeo PhoXi 3D Scanner XL, which is a very accurate 3D sensor that provides surface normals in the point cloud published by its ROS driver. If your 3D sensor does not provide surface normals in the point cloud, you need to change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) (in order to add to the perception pipeline a normal estimation module).
+- This package was tested with a PhotoNeo PhoXi 3D Scanner (XL model), which is a very accurate 3D sensor that provides surface normals in the point cloud published by its ROS driver. If your 3D sensor does not provide surface normals in the point cloud, you need to change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) (in order to add to the perception pipeline a normal estimation module).
