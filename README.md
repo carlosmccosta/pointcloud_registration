@@ -119,4 +119,4 @@ roslaunch pointcloud_registration rviz.launch
 
 ## Notes
 
-- This package was tested with a PhotoNeo PhoXi 3D Scanner (XL model), which is a very accurate 3D sensor that provides surface normals in the point cloud published by its ROS driver. If your 3D sensor does not provide surface normals in the point cloud, you need to change to false the argument [sensor_provides_surface_normals] in [launch/config/pointcloud_registration.launch](launch/config/pointcloud_registration.launch) (in order to add to the perception pipeline a normal estimation module).
+- This package was tested with a PhotoNeo PhoXi 3D Scanner (XL model), which is a very accurate 3D sensor that provides surface normals in the point cloud published by its ROS driver. If your 3D sensor does not provide surface normals in the point cloud, you need to change to true the argument [use_normal_estimation] in [launch/config/bringup.launch](launch/config/bringup.launch) (in order to add to the perception pipeline a normal estimation module).
