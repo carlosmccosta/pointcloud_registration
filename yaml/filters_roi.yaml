@@ -4,8 +4,8 @@ filters:
         0_crop_box:
             box_min_x: -0.3
             box_min_y: -0.2
-            box_min_z: 0.0
-            box_max_x: 0.75
+            box_min_z: 0.003
+            box_max_x: 1.05
             box_max_y: 1.05
             box_max_z: 0.50
             invert_selection: false
