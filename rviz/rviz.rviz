@@ -5,17 +5,18 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
+        - /GridM1
+        - /TF1
         - /TF1/Frames1
-        - /Cloud filtering for storage1
+        - /Cloud filtering for storage1/voxel_grid1
         - /Cloud registration1
-        - /Cloud registration1/Filtering1
-        - /Cloud registration1/Initial alignment1
         - /Cloud registration1/Initial alignment1/Feature matching1
         - /Cloud registration1/ICP alignment1
+        - /Cloud registration1/ICP alignment1/final_alignment1
         - /Cloud registration1/Reference point cloud1
-      Splitter Ratio: 0.6745561957359314
-    Tree Height: 845
+        - /Cloud registration1/Reference point cloud1/reference_pointcloud1
+      Splitter Ratio: 0.674556196
+    Tree Height: 1205
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -24,7 +25,7 @@ Panels:
       - /2D Nav Goal1
       - /Publish Point1
     Name: Tool Properties
-    Splitter Ratio: 0.5886790156364441
+    Splitter Ratio: 0.588679016
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -35,20 +36,18 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Sensor data
-Preferences:
-  PromptSaveOnExit: true
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 0.5
-      Cell Size: 0.10000000149011612
+      Cell Size: 0.100000001
       Class: rviz/Grid
       Color: 160; 160; 164
       Enabled: true
       Line Style:
-        Line Width: 0.029999999329447746
+        Line Width: 0.0299999993
         Value: Lines
       Name: Grid
       Normal Cell Count: 0
@@ -66,7 +65,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Enabled: true
       Line Style:
-        Line Width: 0.029999999329447746
+        Line Width: 0.0299999993
         Value: Lines
       Name: GridM
       Normal Cell Count: 0
@@ -81,8 +80,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.3497368097305298
-        Min Value: -5.399044990539551
+        Max Value: 0.34973681
+        Min Value: -5.39904499
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -90,7 +89,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 255
@@ -101,16 +100,16 @@ Visualization Manager:
       Queue Size: 1
       Selectable: true
       Size (Pixels): 2
-      Size (m): 0.009999999776482582
+      Size (m): 0.00999999978
       Style: Points
       Topic: /camera/depth_registered/points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Class: rviz/TF
       Enabled: true
-      Frame Timeout: 1e+8
+      Frame Timeout: 100000000
       Frames:
         All Enabled: false
         base_link:
@@ -119,21 +118,17 @@ Visualization Manager:
           Value: true
         camera_optical_frame:
           Value: false
-        charuco:
-          Value: true
-        reference_for_rotation_alignment:
-          Value: true
         registration_correction:
           Value: true
         registration_correction__intermediate_point_matching:
-          Value: true
+          Value: false
         registration_correction__pca_matching:
-          Value: true
+          Value: false
         registration_correction__point_matching:
-          Value: true
+          Value: false
         table:
           Value: true
-      Marker Scale: 0.30000001192092896
+      Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -141,25 +136,22 @@ Visualization Manager:
       Tree:
         camera_optical_frame:
           camera_link:
-            registration_correction:
-              {}
-            registration_correction__pca_matching:
-              registration_correction__intermediate_point_matching:
-                registration_correction__point_matching:
-                  {}
-          charuco:
+            {}
+          table:
             base_link:
-              {}
-            table:
-              reference_for_rotation_alignment:
+              registration_correction:
                 {}
+              registration_correction__pca_matching:
+                registration_correction__intermediate_point_matching:
+                  registration_correction__point_matching:
+                    {}
       Update Interval: 0
       Value: true
     - Class: rviz/Axes
       Enabled: false
-      Length: 0.20000000298023224
+      Length: 0.200000003
       Name: Axes
-      Radius: 0.009999999776482582
+      Radius: 0.00999999978
       Reference Frame: <Fixed Frame>
       Value: false
     - Class: rviz/Group
@@ -187,7 +179,7 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 4
-          Size (m): 0.009999999776482582
+          Size (m): 0.00999999978
           Style: Points
           Topic: /pointcloud_storage/filtered_pointcloud_cropbox_table
           Unreliable: false
@@ -206,7 +198,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -216,14 +208,14 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 5
-          Size (m): 0.009999999776482582
+          Size (Pixels): 4
+          Size (m): 0.00999999978
           Style: Points
           Topic: /pointcloud_storage/filtered_pointcloud_voxel_grid_integration
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -247,7 +239,7 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 3
-          Size (m): 0.009999999776482582
+          Size (m): 0.00999999978
           Style: Points
           Topic: /pointcloud_storage/filtered_pointcloud_random_sample_integration
           Unreliable: false
@@ -277,7 +269,7 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 4
-          Size (m): 0.009999999776482582
+          Size (m): 0.00999999978
           Style: Points
           Topic: /pointcloud_storage/filtered_pointcloud_clusters_colored
           Unreliable: false
@@ -307,14 +299,14 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 5
-          Size (m): 0.009999999776482582
+          Size (m): 0.00999999978
           Style: Points
           Topic: /pointcloud_storage/filtered_pointcloud_clustering
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: true
+      Enabled: false
       Name: Cloud filtering for storage
     - Class: rviz/Group
       Displays:
@@ -332,7 +324,7 @@ Visualization Manager:
               Color: 255; 170; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -343,13 +335,13 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 2
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/filtered_pointcloud_cropbox_table
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -373,7 +365,7 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 3
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/filtered_pointcloud_random_sample_table
               Unreliable: false
@@ -403,7 +395,7 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 3
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/voxel_grid
               Unreliable: false
@@ -433,7 +425,7 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 3
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/filtered_pointcloud_clusters_colored
               Unreliable: false
@@ -452,7 +444,7 @@ Visualization Manager:
               Color: 227; 227; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -463,13 +455,13 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 3
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/filtered_pointcloud_clustering
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -493,7 +485,7 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 5
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/filtered_pointcloud_random_sample_clustering
               Unreliable: false
@@ -516,7 +508,7 @@ Visualization Manager:
               Color: 170; 85; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: false
+              Enabled: true
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -527,13 +519,13 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 4
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/pca_alignment_reference_cloud
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: false
+              Value: true
             - Class: rviz/Group
               Displays:
                 - Alpha: 1
@@ -559,7 +551,7 @@ Visualization Manager:
                   Queue Size: 10
                   Selectable: true
                   Size (Pixels): 10
-                  Size (m): 0.009999999776482582
+                  Size (m): 0.00999999978
                   Style: Points
                   Topic: /pointcloud_registration/ambient_keypoints
                   Unreliable: false
@@ -567,17 +559,17 @@ Visualization Manager:
                   Use rainbow: true
                   Value: false
                 - Alpha: 1
-                  Arrow Length: 0.30000001192092896
-                  Axes Length: 0.30000001192092896
-                  Axes Radius: 0.009999999776482582
+                  Arrow Length: 0.300000012
+                  Axes Length: 0.300000012
+                  Axes Radius: 0.00999999978
                   Class: rviz/PoseArray
                   Color: 255; 25; 0
                   Enabled: false
-                  Head Length: 0.029999999329447746
-                  Head Radius: 0.029999999329447746
+                  Head Length: 0.0299999993
+                  Head Radius: 0.0299999993
                   Name: Initial pose estimation
-                  Shaft Length: 0.10000000149011612
-                  Shaft Radius: 0.009999999776482582
+                  Shaft Length: 0.100000001
+                  Shaft Radius: 0.00999999978
                   Shape: Arrow (3D)
                   Topic: /pointcloud_registration/localization_initial_pose_estimations
                   Unreliable: false
@@ -605,7 +597,7 @@ Visualization Manager:
                   Queue Size: 10
                   Selectable: true
                   Size (Pixels): 5
-                  Size (m): 0.009999999776482582
+                  Size (m): 0.00999999978
                   Style: Points
                   Topic: /pointcloud_registration/initial_alignment_reference_cloud
                   Unreliable: false
@@ -614,7 +606,7 @@ Visualization Manager:
                   Value: true
               Enabled: true
               Name: Feature matching
-          Enabled: true
+          Enabled: false
           Name: Initial alignment
         - Class: rviz/Group
           Displays:
@@ -641,14 +633,14 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 5
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/intermediate_alignment_reference_cloud
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
               Value: false
-            - Alpha: 1
+            - Alpha: 0.800000012
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
                 Max Value: 10
@@ -657,7 +649,7 @@ Visualization Manager:
               Axis: Z
               Channel Name: intensity
               Class: rviz/PointCloud2
-              Color: 85; 255; 127
+              Color: 170; 255; 0
               Color Transformer: FlatColor
               Decay Time: 0
               Enabled: true
@@ -670,9 +662,9 @@ Visualization Manager:
               Position Transformer: XYZ
               Queue Size: 10
               Selectable: true
-              Size (Pixels): 7
-              Size (m): 0.009999999776482582
-              Style: Points
+              Size (Pixels): 5
+              Size (m): 0.0120000001
+              Style: Spheres
               Topic: /pointcloud_registration/final_alignment_reference_cloud
               Unreliable: false
               Use Fixed Frame: true
@@ -691,8 +683,8 @@ Visualization Manager:
               Axis: Z
               Channel Name: intensity
               Class: rviz/PointCloud2
-              Color: 255; 255; 255
-              Color Transformer: RGB8
+              Color: 0; 170; 255
+              Color Transformer: FlatColor
               Decay Time: 0
               Enabled: true
               Invert Rainbow: false
@@ -705,8 +697,8 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 3
-              Size (m): 0.009999999776482582
-              Style: Points
+              Size (m): 0.00800000038
+              Style: Spheres
               Topic: /pointcloud_registration/reference_pointcloud
               Unreliable: false
               Use Fixed Frame: true
@@ -724,7 +716,7 @@ Visualization Manager:
               Color: 85; 255; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -735,13 +727,13 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 10
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/reference_pointcloud_keypoints
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -754,7 +746,7 @@ Visualization Manager:
               Color: 170; 255; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -765,13 +757,13 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 5
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/aligned_pointcloud_inliers
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -784,7 +776,7 @@ Visualization Manager:
               Color: 255; 0; 0
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 4096
@@ -795,14 +787,14 @@ Visualization Manager:
               Queue Size: 10
               Selectable: true
               Size (Pixels): 5
-              Size (m): 0.009999999776482582
+              Size (m): 0.00999999978
               Style: Points
               Topic: /pointcloud_registration/aligned_pointcloud_outliers
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
-          Enabled: false
+              Value: false
+          Enabled: true
           Name: Reference point cloud
       Enabled: true
       Name: Cloud registration
@@ -821,10 +813,7 @@ Visualization Manager:
     - Class: rviz/FocusCamera
     - Class: rviz/Measure
     - Class: rviz/SetInitialPose
-      Theta std deviation: 0.2617993950843811
       Topic: /initialpose
-      X std deviation: 0.5
-      Y std deviation: 0.5
     - Class: rviz/SetGoal
       Topic: /move_base_simple/goal
     - Class: rviz/PublishPoint
@@ -834,33 +823,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.9631764888763428
+      Distance: 2.93755841
       Enable Stereo Rendering:
-        Stereo Eye Separation: 0.05999999865889549
+        Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.45275387167930603
-        Y: 0.4803716242313385
-        Z: -0.22943063080310822
+        X: 0.532073259
+        Y: 0.154713273
+        Z: -0.226043761
       Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05000000074505806
+      Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
-      Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9097965359687805
+      Near Clip Distance: 0.00999999978
+      Pitch: 1.31479657
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.273296356201172
+      Yaw: 4.71240997
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1025
+  Height: 1416
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001e9000004fefc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000160049006d00610067006500200063006f006c006f0072010000004a000002210000000000000000fb0000001a0049006d0061006700650020006300680061007200750063006f0100000272000001250000000000000000fb000000160049006d006100670065002000640065007000740068010000039e000001aa00000000000000000000000100000256000003a7fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fc0000003d000003a7000000e60100001cfa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010000fffffffb000000100044006900730070006c0061007900730100000867000001560000015600fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009bd0000003efc0100000002fb0000000800540069006d00650000000000000009bd000002eb00fffffffb0000000800540069006d0065010000000000000450000000000000000000000524000003a700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001e9000004fefc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006300fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000160049006d00610067006500200063006f006c006f0072010000004a000002210000000000000000fb0000001a0049006d0061006700650020006300680061007200750063006f0100000272000001250000000000000000fb000000160049006d006100670065002000640065007000740068010000039e000001aa000000000000000000000001000003fd0000051dfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fc0000004a0000051d000000fe01000020fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000011100fffffffb000000100044006900730070006c0061007900730100000867000001560000017900fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009bd0000003efc0100000002fb0000000800540069006d00650000000000000009bd0000038300fffffffb0000000800540069006d00650100000000000004500000000000000000000005fc0000051d00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -869,6 +858,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1920
+  Width: 2560
   X: 0
-  Y: 27
+  Y: 24
