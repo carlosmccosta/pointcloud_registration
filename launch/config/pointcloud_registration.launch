@@ -23,6 +23,16 @@
 	<arg name="reference_pointcloud_filename" default="" />
 	<arg name="reference_pointclouds_database_folder_path" default="$(find pointcloud_registration)/models/" />
 
+	<arg name="yaml_configuration_filters_roi_filename" default="$(find pointcloud_registration)/yaml/filters_roi.yaml" />
+	<arg name="yaml_configuration_filters_voxel_grid_filename" default="$(find pointcloud_registration)/yaml/filters_voxel_grid.yaml" />
+	<arg name="yaml_configuration_filters_euclidean_clustering_filename" default="$(find pointcloud_registration)/yaml/filters_euclidean_clustering.yaml" />
+	<arg name="yaml_configuration_initial_pose_estimators_feature_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_feature_matchers.yaml" />
+	<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(find object_recognition_skill_server)/yaml/initial_pose_estimators_pca_matchers.yaml" if="$(eval base_link_frame_id == 'camera_link')" />
+	<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_pca_matchers_with_base_link_axes_flip.yaml" unless="$(eval base_link_frame_id == 'camera_link')" />
+	<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_point_matchers.yaml" />
+	<arg name="yaml_configuration_outlier_detectors_filename" default="$(find pointcloud_registration)/yaml/outlier_detectors.yaml" />
+	<arg name="yaml_configuration_transformation_validators_filename" default="$(find pointcloud_registration)/yaml/transformation_validators.yaml" />
+
 	<include file="$(find object_recognition_skill_server)/launch/object_recognition.launch">
 		<arg name="namespace" default="pointcloud_storage" if="$(arg use_cloud_storage_mode)" />
 		<arg name="namespace" default="pointcloud_registration" unless="$(arg use_cloud_storage_mode)" />
@@ -53,15 +63,15 @@
 		<arg name="use_transformation_aligner" default="$(arg use_transformation_aligner)" />
 
 		<!-- configuration files (empty paths can be given for avoiding the rosparam load) -->
-		<arg name="yaml_configuration_filters_roi_filename" default="$(find pointcloud_registration)/yaml/filters_roi.yaml" />
-		<arg name="yaml_configuration_filters_voxel_grid_filename" default="$(find pointcloud_registration)/yaml/filters_voxel_grid.yaml" />
-		<arg name="yaml_configuration_filters_euclidean_clustering_filename" default="$(find pointcloud_registration)/yaml/filters_euclidean_clustering.yaml" />
+		<arg name="yaml_configuration_filters_roi_filename" default="$(arg yaml_configuration_filters_roi_filename)" />
+		<arg name="yaml_configuration_filters_voxel_grid_filename" default="$(arg yaml_configuration_filters_voxel_grid_filename)" />
+		<arg name="yaml_configuration_filters_euclidean_clustering_filename" default="$(arg yaml_configuration_filters_euclidean_clustering_filename)" />
 		<arg name="yaml_configuration_curvature_estimators_filename" default="" />
-		<arg name="yaml_configuration_initial_pose_estimators_feature_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_feature_matchers.yaml" />
-		<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_pca_matchers.yaml" />
-		<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_point_matchers.yaml" />
-		<arg name="yaml_configuration_outlier_detectors_filename" default="$(find pointcloud_registration)/yaml/outlier_detectors.yaml" />
-		<arg name="yaml_configuration_transformation_validators_filename" default="$(find pointcloud_registration)/yaml/transformation_validators.yaml" />
+		<arg name="yaml_configuration_initial_pose_estimators_feature_matchers_filename" default="$(arg yaml_configuration_initial_pose_estimators_feature_matchers_filename)" />
+		<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(arg yaml_configuration_initial_pose_estimators_pca_matchers_filename)" />
+		<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(arg yaml_configuration_initial_pose_estimators_point_matchers_filename)" />
+		<arg name="yaml_configuration_outlier_detectors_filename" default="$(arg yaml_configuration_outlier_detectors_filename)" />
+		<arg name="yaml_configuration_transformation_validators_filename" default="$(arg yaml_configuration_transformation_validators_filename)" />
 
 		<!-- reference map data -->
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" />

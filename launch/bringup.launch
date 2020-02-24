@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 	<arg name="use_cloud_storage_mode" default="false" />
-	<arg name="use_normal_estimation" default="false" />
+	<arg name="use_normal_estimation" default="true" />
 	<arg name="use_euclidean_clustering_segmentation" default="true" />
 	<arg name="use_pca_for_initial_alignment" default="true" />
 	<arg name="use_feature_matching_for_initial_alignment" default="false" />
