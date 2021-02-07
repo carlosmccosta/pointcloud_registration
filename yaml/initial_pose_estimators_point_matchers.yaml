@@ -1,9 +1,10 @@
 initial_pose_estimators_matchers:
+    initial_pose_estimation_timeout: -1.0
     publish_pointclouds_only_if_there_is_subscribers: false
     point_matchers:
         # 2_iterative_closest_point:
         2_iterative_closest_point_with_normals:
-            correspondence_estimation_approach: 'CorrespondenceEstimationBackProjection'
+            correspondence_estimation_approach: 'CorrespondenceEstimation'
             correspondence_estimation_k: 0
             correspondence_estimation_normals_angle_filtering_threshold: 60.0
             correspondence_estimation_normals_angle_penalty_factor: 3.0
@@ -27,7 +28,7 @@ initial_pose_estimators_matchers:
         # 3_iterative_closest_point:
         3_iterative_closest_point_with_normals:
         # 3_iterative_closest_point_generalized:
-            correspondence_estimation_approach: 'CorrespondenceEstimationBackProjection'
+            correspondence_estimation_approach: 'CorrespondenceEstimation'
             correspondence_estimation_k: 0
             correspondence_estimation_normals_angle_filtering_threshold: 60.0
             correspondence_estimation_normals_angle_penalty_factor: 6.0
