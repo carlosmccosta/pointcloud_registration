@@ -32,6 +32,7 @@
 	<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_point_matchers.yaml" />
 	<arg name="yaml_configuration_outlier_detectors_filename" default="$(find pointcloud_registration)/yaml/outlier_detectors.yaml" />
 	<arg name="yaml_configuration_transformation_validators_filename" default="$(find pointcloud_registration)/yaml/transformation_validators.yaml" />
+	<arg name="yaml_configuration_custom_filename" default="" /> <!-- extra custom configurations -->
 
 	<include file="$(find object_recognition_skill_server)/launch/object_recognition.launch">
 		<arg name="namespace" default="pointcloud_storage" if="$(arg use_cloud_storage_mode)" />
@@ -75,6 +76,7 @@
 		<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(arg yaml_configuration_initial_pose_estimators_point_matchers_filename)" />
 		<arg name="yaml_configuration_outlier_detectors_filename" default="$(arg yaml_configuration_outlier_detectors_filename)" />
 		<arg name="yaml_configuration_transformation_validators_filename" default="$(arg yaml_configuration_transformation_validators_filename)" />
+		<arg name="yaml_configuration_custom_filename" default="$(arg yaml_configuration_custom_filename)" />
 
 		<!-- reference map data -->
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" />
