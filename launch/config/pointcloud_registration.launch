@@ -62,6 +62,8 @@
 		<arg name="load_initial_pose_estimation_pipeline_using_pca" default="$(arg load_initial_pose_estimation_pipeline_using_pca)" />
 		<arg name="use_cloud_matching" default="$(arg use_cloud_matching)" />
 		<arg name="use_transformation_aligner" default="$(arg use_transformation_aligner)" />
+		<arg name="max_registration_outliers" default="0.33" />
+		<arg name="max_registration_outliers_reference_pointcloud" default="0.2" />
 
 		<!-- configuration files (empty paths can be given for avoiding the rosparam load) -->
 		<arg name="yaml_configuration_filters_roi_filename" default="$(arg yaml_configuration_filters_roi_filename)" />
