@@ -26,11 +26,16 @@
 	<arg name="reference_pointcloud_filename" default="" />
 	<arg name="reference_pointclouds_database_folder_path" default="$(find pointcloud_registration)/models/" />
 
+	<arg name="max_registration_outliers" default="0.33" />
+	<arg name="max_registration_outliers_reference_pointcloud" default="0.2" />
+
 	<arg name="yaml_configuration_filters_roi_filename" default="$(find pointcloud_registration)/yaml/filters_roi.yaml" />
 	<arg name="yaml_configuration_filters_voxel_grid_filename" default="$(find pointcloud_registration)/yaml/filters_voxel_grid.yaml" />
 	<arg name="yaml_configuration_filters_noise_removal_filename" default="$(find object_recognition_skill_server)/yaml/filters_noise_removal.yaml" />
 	<arg name="yaml_configuration_filters_euclidean_clustering_filename" default="$(find pointcloud_registration)/yaml/filters_euclidean_clustering.yaml" />
 	<arg name="yaml_configuration_initial_pose_estimators_feature_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_feature_matchers.yaml" />
+	<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(find object_recognition_skill_server)/yaml/initial_pose_estimators_pca_matchers.yaml" if="$(eval base_link_frame_id == 'camera_link')" />
+	<arg name="yaml_configuration_initial_pose_estimators_pca_matchers_filename" default="$(find object_recognition_skill_server)/yaml/initial_pose_estimators_pca_matchers_with_base_link_axes_flip.yaml" unless="$(eval base_link_frame_id == 'camera_link')" />
 	<arg name="yaml_configuration_initial_pose_estimators_point_matchers_filename" default="$(find pointcloud_registration)/yaml/initial_pose_estimators_point_matchers.yaml" />
 	<arg name="yaml_configuration_outlier_detectors_filename" default="$(find pointcloud_registration)/yaml/outlier_detectors.yaml" />
 	<arg name="yaml_configuration_transformation_validators_filename" default="$(find pointcloud_registration)/yaml/transformation_validators.yaml" />
@@ -67,8 +72,8 @@
 		<arg name="load_initial_pose_estimation_pipeline_using_pca" default="$(arg load_initial_pose_estimation_pipeline_using_pca)" />
 		<arg name="use_cloud_matching" default="$(arg use_cloud_matching)" />
 		<arg name="use_transformation_aligner" default="$(arg use_transformation_aligner)" />
-		<arg name="max_registration_outliers" default="0.33" />
-		<arg name="max_registration_outliers_reference_pointcloud" default="0.2" />
+		<arg name="max_registration_outliers" default="$(arg max_registration_outliers)" />
+		<arg name="max_registration_outliers_reference_pointcloud" default="$(arg max_registration_outliers_reference_pointcloud)" />
 
 		<!-- configuration files (empty paths can be given for avoiding the rosparam load) -->
 		<arg name="yaml_configuration_filters_roi_filename" default="$(arg yaml_configuration_filters_roi_filename)" />
